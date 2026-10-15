@@ -1,5 +1,5 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PURE LOGIC · 지뢰찾기</title><style>
-:root{color-scheme:dark;font-family:system-ui,-apple-system,'Noto Sans KR',sans-serif}*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e9efff;min-height:100vh}main{max-width:1100px;margin:auto;padding:24px 14px}h1{margin:0;font-size:clamp(26px,4vw,42px);letter-spacing:-1px}.sub{color:#98a7c7;margin:8px 0 22px}.panel{background:#151d33;border:1px solid #2a3856;border-radius:16px;padding:16px;margin-bottom:16px}.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button,select{font:inherit;color:#eef4ff;border:1px solid #394a6c;border-radius:10px;background:#202e4c;padding:10px 14px;cursor:pointer}button:hover{background:#2b4067}button:disabled{opacity:.5;cursor:wait}.primary{background:#426df1;border-color:#6286ff}.stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-weight:700}.stats span{color:#a7b8da;font-weight:400}.boardwrap{overflow:auto;padding:10px;background:#10182c;border:1px solid #2a3856;border-radius:14px;max-width:100%;touch-action:pan-x pan-y}.board{display:grid;gap:2px;width:max-content;margin:auto;user-select:none}.cell{padding:0;border:0;border-radius:4px;width:var(--cell);height:var(--cell);font-size:calc(var(--cell)*.53);font-weight:850;display:grid;place-items:center;background:#31446c;box-shadow:inset 0 -3px #243456;cursor:pointer;touch-action:manipulation}.cell:hover:not(.open){background:#42618e}.cell.open{background:#dfe8f5;box-shadow:none;cursor:default}.cell.flag{background:#46577a}.cell.mine{background:#ffb0b0}.cell.hit{background:#ff5367}.n1{color:#2258c9}.n2{color:#13844e}.n3{color:#cf3746}.n4{color:#6637b8}.n5{color:#9d451a}.n6{color:#008b96}.n7{color:#1f2937}.n8{color:#64748b}.status{min-height:26px;margin:12px 0;color:#c8d7ff}.help{color:#b1c1e0;line-height:1.7;font-size:14px}.action-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.action-mode{display:flex;flex-direction:column;align-items:center;gap:5px;min-height:90px;background:#1b2944;border:2px solid #394a6c}.action-mode .mode-icon{font-size:25px}.action-mode small{color:#b6c6e3}.action-mode.selected{background:#244985;border-color:#77b1ff;box-shadow:0 0 0 2px #244985}.action-mode.selected small{color:#fff}.touch-guide{font-size:13px;color:#b6c6e3;margin:9px 0 0;text-align:center}.cell{touch-action:none; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none;}.spinner{display:inline-block;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:650px){
+:root{color-scheme:dark;font-family:system-ui,-apple-system,'Noto Sans KR',sans-serif}*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e9efff;min-height:100vh}main{max-width:1100px;margin:auto;padding:24px 14px}h1{margin:0;font-size:clamp(26px,4vw,42px);letter-spacing:-1px}.sub{color:#98a7c7;margin:8px 0 22px}.panel{background:#151d33;border:1px solid #2a3856;border-radius:16px;padding:16px;margin-bottom:16px}.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button,select{font:inherit;color:#eef4ff;border:1px solid #394a6c;border-radius:10px;background:#202e4c;padding:10px 14px;cursor:pointer}button:hover{background:#2b4067}button:disabled{opacity:.5;cursor:wait}.primary{background:#426df1;border-color:#6286ff}.stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-weight:700}.stats span{color:#a7b8da;font-weight:400}.boardwrap{overflow:auto;padding:10px;background:#10182c;border:1px solid #2a3856;border-radius:14px;max-width:100%;touch-action:pan-x pan-y}.board{display:grid;gap:2px;width:max-content;margin:auto;user-select:none}.cell{padding:0;border:0;border-radius:4px;width:var(--cell);height:var(--cell);font-size:calc(var(--cell)*.53);font-weight:850;display:grid;place-items:center;background:#31446c;box-shadow:inset 0 -3px #243456;cursor:pointer;touch-action:manipulation}.cell:hover:not(.open){background:#42618e}.cell.open{background:#dfe8f5;box-shadow:none;cursor:default}.cell.flag{background:#46577a}.cell.mine{background:#ffb0b0}.cell.hit{background:#ff5367}.n1{color:#2258c9}.n2{color:#13844e}.n3{color:#cf3746}.n4{color:#6637b8}.n5{color:#9d451a}.n6{color:#008b96}.n7{color:#1f2937}.n8{color:#64748b}.status{min-height:26px;margin:12px 0;color:#c8d7ff}.help{color:#b1c1e0;line-height:1.7;font-size:14px}.action-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.action-mode{display:flex;flex-direction:column;align-items:center;gap:5px;min-height:90px;background:#1b2944;border:2px solid #394a6c}.action-mode .mode-icon{font-size:25px}.action-mode small{color:#b6c6e3}.action-mode.selected{background:#244985;border-color:#77b1ff;box-shadow:0 0 0 2px #244985}.action-mode.selected small{color:#fff}.touch-guide{font-size:13px;color:#b6c6e3;margin:9px 0 0;text-align:center}.cell{touch-action:none; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none;}.spinner{display:inline-block;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:650px){
 main{padding:6px 7px;max-width:100vw}h1{font-size:19px}.sub{font-size:11px;margin:2px 0 7px}
 .panel{padding:8px;margin-bottom:5px;border-radius:10px}.controls{gap:5px;justify-content:center}.controls label{font-size:12px}
 .controls button,.controls select{padding:6px 7px;font-size:12px;border-radius:7px}
@@ -10,6 +10,7 @@ main{padding:6px 7px;max-width:100vw}h1{font-size:19px}.sub{font-size:11px;margi
 .help{display:none}
 }
 
+.flag-tip{display:inline-flex;align-items:center;padding:8px 10px;border:1px solid #56657d;border-radius:9px;background:#27344c;color:#e5efff;font-size:12px;font-weight:700;white-space:nowrap}.flag-tip.done{border-color:#70c69d;background:#184e3e;color:#eafff1}@media(max-width:650px){.flag-tip{padding:6px 7px;font-size:10px}}
 /* Classic raised minesweeper tiles: covered = raised, revealed = recessed */
 .board{background:#7f91ac;padding:2px;gap:1px!important;border:2px solid #64748b;box-shadow:inset 2px 2px #45546d,inset -2px -2px #d9e2ef}
 .cell,.cell.flag{appearance:none;-webkit-appearance:none;border-radius:0!important;background:#9fa4ad!important;color:#18283c;border-top:3px solid #e2e4e8;border-left:3px solid #e2e4e8;border-right:3px solid #555c66;border-bottom:3px solid #555c66;box-shadow:inset 1px 1px #c8cbd0,1px 1px 0 #444b55!important;transition:background .09s ease,transform .07s ease;line-height:1}
@@ -18,30 +19,52 @@ main{padding:6px 7px;max-width:100vw}h1{font-size:19px}.sub{font-size:11px;margi
 .cell.open{background:#e2e8f0!important;border:1px solid #96a6bb!important;box-shadow:inset 1px 1px 0 #a5b2c5!important;transform:none;cursor:default}
 .cell.mine{background:#ffb4b4!important}.cell.hit{background:#fa5d6d!important}
 @media(max-width:650px){.cell,.cell.flag{border-width:2px}.cell.open{border-width:1px}}
-</style></head><body><main><h1>💣 PURE LOGIC</h1><p class="sub">눌러서 입체 블록을 열어보세요 · No Guess</p><section class="panel"><div class="controls"><label for="level">난이도</label><select id="level"><option value="0">입문 · 8×8 / 8개</option><option value="1">초급 · 9×9 / 10개</option><option value="2">중급 · 12×12 / 24개</option><option value="3">상급 · 16×16 / 40개</option><option value="4">200칸 · 10×20 / 35개</option><option value="5">전문가 · 20×20 / 75개</option></select><button class="primary" id="restart">↻ 새 게임</button><button id="hint">💡 논리 힌트</button></div><div class="action-modes" role="group" aria-label="터치 동작 선택"><button type="button" id="openmode" class="action-mode selected" aria-pressed="true"><span class="mode-icon">👆</span><strong>칸 열기</strong><small>✓ 선택됨</small></button><button type="button" id="flagmode" class="action-mode" aria-pressed="false"><span class="mode-icon">🚩</span><strong>깃발 놓기</strong><small>터치해서 표시</small></button><button type="button" id="removemode" class="action-mode" aria-pressed="false"><span class="mode-icon">❌</span><strong>깃발 제거</strong><small>깃발을 터치</small></button></div><p class="touch-guide">💡 열린 칸 터치 = 칸 열기 선택 · 🚩 터치 = 깃발 놓기 선택 · 깃발 1초 길게 = 깃발 제거 모드 선택</p><div class="stats"><div>💣 <span>남은 지뢰</span> <b id="remaining">0</b></div><div>⏱️ <span>시간</span> <b id="timer">0</b>초</div><div>🔎 <span>열린 칸</span> <b id="opened">0</b></div></div></section><div class="status" id="status" role="status">첫 칸을 눌러 시작하세요.</div><div class="boardwrap"><div id="board" class="board" role="grid" aria-label="지뢰찾기 게임판"></div></div><section class="panel help" style="margin-top:16px"><strong>게임 방법</strong><p>휴대폰: 이미 열린 숫자 칸을 터치하면 칸 열기 모드, 깃발이 있는 칸을 터치하면 깃발 놓기 모드로 바뀝니다. 위쪽 버튼도 사용할 수 있습니다. 빈 칸을 0.5초 길게 누르면 깃발을 놓습니다. 깃발을 1초 길게 누르면 깃발 제거 모드로 바뀌고, 깃발을 짧게 터치하면 제거합니다. PC: 왼쪽 클릭은 선택한 동작, 오른쪽 클릭은 깃발입니다. 첫 클릭과 주변 8칸은 안전합니다. 숫자는 주변 8칸의 지뢰 개수입니다. 모든 안전한 칸을 열면 승리합니다.</p><p><strong>No Guess 보장:</strong> 시작할 때 실제 논리 풀이 엔진으로 검증한 맵만 사용합니다. 첫 클릭 후 맵을 만들기 때문에 잠깐 기다릴 수 있습니다. 힌트는 현재 공개된 정보에서 논리적으로 확정되는 안전 칸을 찾아줍니다.</p></section></main><script>
+ .score-summary{margin-top:10px;color:#d8e7ff;font-size:14px}.score-summary b{color:#fff}.score-summary span{margin-left:12px;color:#a7b8da}.scoreboard{padding:12px 16px}.score-heading{display:flex;justify-content:space-between;align-items:center;gap:8px}.score-heading button{padding:5px 9px;font-size:12px}.score-note{font-size:12px;color:#9fb0d0;margin:9px 0 0}.score-row{display:grid;grid-template-columns:32px 1fr auto;gap:8px;padding:6px 0;border-bottom:1px solid #2a3856;font-size:13px}.score-row:last-child{border:0}.score-row .muted{color:#a7b8da} @media(max-width:650px){.scoreboard{padding:9px 12px}.score-note{font-size:11px}} 
+/* 상단 대형 기록판 */
+.top-layout{display:grid;grid-template-columns:minmax(280px,1fr) minmax(370px,1.35fr);align-items:stretch;gap:18px;margin-bottom:18px}
+.top-layout .brand{padding:12px 0}
+.top-layout .scoreboard{margin:0;padding:20px 24px;min-height:180px;background:#192744;border-color:#45628f;box-shadow:0 8px 24px #0002}
+.top-layout .score-heading strong{font-size:23px}
+.top-layout .score-heading button{font-size:12px}
+.top-layout #score-list{font-size:17px;margin-top:12px;min-height:46px}
+.top-layout .score-row{font-size:16px;grid-template-columns:40px 1fr auto;padding:10px 0}
+.top-layout .score-note{font-size:13px;line-height:1.5}
+@media(max-width:760px){.top-layout{grid-template-columns:1fr;gap:8px;margin-bottom:8px}.top-layout .brand{padding:0}.top-layout .scoreboard{padding:13px 14px;min-height:unset}.top-layout .score-heading strong{font-size:18px}.top-layout #score-list{font-size:15px;margin-top:8px}.top-layout .score-row{font-size:14px;padding:7px 0}.top-layout .score-note{font-size:11px}.top-layout .sub{margin-bottom:2px}}
+</style></head><body><main><div class="top-layout"><div class="brand"><h1>💣 PURE LOGIC</h1><p class="sub">눌러서 입체 블록을 열어보세요 · No Guess</p></div><section class="panel scoreboard"><div class="score-heading"><strong>🏆 난이도별 최고 기록</strong><button type="button" id="clear-scores">기록 초기화</button></div><div id="score-list">아직 기록이 없습니다.</div><p class="score-note">안전한 칸을 모두 열고 모든 지뢰에 정확히 깃발을 꽂으면 클리어! 기록은 이 브라우저에 저장됩니다.</p></section></div><section class="panel"><div class="controls"><label for="level">난이도</label><select id="level"><option value="0">입문 · 8×8 / 8개</option><option value="1">초급 · 9×9 / 10개</option><option value="2">중급 · 12×12 / 24개</option><option value="3">상급 · 16×16 / 40개</option><option value="4">200칸 · 10×20 / 35개</option><option value="5">전문가 · 20×20 / 75개</option></select><button class="primary" id="restart">↻ 새 게임</button><button id="hint">💡 논리 힌트</button><span id="flag-tip" class="flag-tip" role="status">🚩 깃발 두 번 터치 → 제거</span></div><div class="action-modes" role="group" aria-label="터치 동작 선택"><button type="button" id="openmode" class="action-mode selected" aria-pressed="true"><span class="mode-icon">👆</span><strong>칸 열기</strong><small>✓ 선택됨</small></button><button type="button" id="flagmode" class="action-mode" aria-pressed="false"><span class="mode-icon">🚩</span><strong>깃발 놓기</strong><small>터치해서 표시</small></button></div><p class="touch-guide">💡 열린 칸 터치 = 칸 열기 선택 · 🚩 터치 = 깃발 놓기 선택 · 깃발 두 번 터치 = 깃발 제거</p><div class="stats"><div>💣 <span>남은 지뢰</span> <b id="remaining">0</b></div><div>⏱️ <span>시간</span> <b id="timer">0</b>초</div><div>🔎 <span>열린 칸</span> <b id="opened">0</b></div></div><div class="score-summary">🏅 현재 점수 <b id="live-score">0</b> <span>· 💡 힌트 <b id="hint-count">0</b>회</span></div></section><div class="status" id="status" role="status">첫 칸을 눌러 시작하세요.</div><div class="boardwrap"><div id="board" class="board" role="grid" aria-label="지뢰찾기 게임판"></div></div><section class="panel help" style="margin-top:16px"><strong>게임 방법</strong><p>휴대폰: 이미 열린 숫자 칸을 터치하면 칸 열기 모드, 깃발이 있는 칸을 한 번 터치하면 깃발 놓기 모드로 바뀌고 두 번 빠르게 터치하면 깃발이 제거됩니다. 위쪽 버튼도 사용할 수 있습니다. 빈 칸을 0.5초 길게 누르면 깃발을 놓습니다. 깃발을 빠르게 두 번 터치하면 깃발이 바로 제거됩니다. PC: 왼쪽 클릭은 선택한 동작, 오른쪽 클릭은 깃발입니다. 첫 클릭과 주변 8칸은 안전합니다. 숫자는 주변 8칸의 지뢰 개수입니다. 모든 안전한 칸을 열고 실제 지뢰에 깃발을 모두 정확히 표시하면 승리합니다.</p><p><strong>No Guess 보장:</strong> 시작할 때 실제 논리 풀이 엔진으로 검증한 맵만 사용합니다. 첫 클릭 후 맵을 만들기 때문에 잠깐 기다릴 수 있습니다. 힌트는 현재 공개된 정보에서 논리적으로 확정되는 안전 칸을 찾아줍니다.</p></section></main><script>
 'use strict';
 const presets=[[8,8,8],[9,9,10],[12,12,24],[16,16,40],[10,20,35],[20,20,75]];
-const $=id=>document.getElementById(id);let W,H,M,N,mines=[],nums=[],revealed=[],flags=[],first=true,over=false,busy=false,flagMode=false,mode="open",opened=0,startTime=0,timerId=null,generation=0;
+const $=id=>document.getElementById(id);let W,H,M,N,mines=[],nums=[],revealed=[],flags=[],first=true,over=false,busy=false,flagMode=false,mode="open",opened=0,startTime=0,timerId=null,generation=0,hintsUsed=0;
 function adj(i){let x=i%W,y=Math.floor(i/W),a=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){let xx=x+dx,yy=y+dy;if((dx||dy)&&xx>=0&&xx<W&&yy>=0&&yy<H)a.push(yy*W+xx)}return a}
-function setup(){generation++;[W,H,M]=presets[+$('level').value];N=W*H;mines=Array(N).fill(false);nums=Array(N).fill(0);revealed=Array(N).fill(false);flags=Array(N).fill(false);first=true;over=false;busy=false;opened=0;flagMode=false;clearInterval(timerId);$('timer').textContent='0';$('status').textContent='첫 칸을 눌러 시작하세요.';setMode('open');$('restart').disabled=false;const mobile=window.innerWidth<=650;
+const SCORE_KEY='pure_logic_records_v1';
+function readScores(){try{let v=JSON.parse(localStorage.getItem(SCORE_KEY)||'{}');return v&&typeof v==='object'?v:{}}catch{return {}}}
+function elapsed(){return first?0:Math.floor((Date.now()-startTime)/1000)}
+function scoreValue(){return Math.max(0,Math.round((M*35+N*3+500-elapsed()*2-hintsUsed*75)))}
+function scoreBoard(){let list=readScores()[String($('level').value)]||[];$('score-list').innerHTML='';if(!list.length){$('score-list').textContent='아직 기록이 없습니다. 첫 번째 기록에 도전하세요!';return}list.slice(0,5).forEach((r,i)=>{let row=document.createElement('div');row.className='score-row';let rank=document.createElement('strong');rank.textContent=(i+1)+'위';let info=document.createElement('span');info.className='muted';info.textContent=`${r.seconds}초 · 힌트 ${r.hints}회 · ${r.date}`;let points=document.createElement('strong');points.textContent=r.score.toLocaleString()+'점';row.append(rank,info,points);$('score-list').append(row)})}
+function updateScore(){$('live-score').textContent=scoreValue().toLocaleString();$('hint-count').textContent=hintsUsed}
+function saveScore(){let all=readScores(),key=String($('level').value);let date=new Date().toLocaleDateString('ko-KR');let entry={score:scoreValue(),seconds:elapsed(),hints:hintsUsed,date};all[key]=[...(all[key]||[]),entry].sort((a,b)=>b.score-a.score||a.seconds-b.seconds).slice(0,5);try{localStorage.setItem(SCORE_KEY,JSON.stringify(all))}catch{}scoreBoard();return entry.score}
+function checkWin(){if(over||first)return;const correct=flags.every((f,i)=>f===mines[i]);if(opened===N-M&&correct){clearInterval(timerId);updateScore();const points=saveScore();over=true;$('status').textContent=`🏆 완전 클리어! 모든 안전 칸과 지뢰 깃발을 정확히 맞혔습니다. ${points.toLocaleString()}점!`;return}if(opened===N-M){let flagged=flags.filter(Boolean).length;$('status').textContent=`✨ 안전 칸 완료! 남은 지뢰에 정확히 깃발을 표시하세요. (${flagged}/${M})`}}
+function setup(){generation++;$('flag-tip').textContent='🚩 깃발 두 번 터치 → 제거';$('flag-tip').classList.remove('done');[W,H,M]=presets[+$('level').value];N=W*H;mines=Array(N).fill(false);nums=Array(N).fill(0);revealed=Array(N).fill(false);flags=Array(N).fill(false);first=true;over=false;busy=false;opened=0;hintsUsed=0;flagMode=false;clearInterval(timerId);$('timer').textContent='0';$('status').textContent='첫 칸을 눌러 시작하세요.';setMode('open');$('restart').disabled=false;scoreBoard();updateScore();const mobile=window.innerWidth<=650;
 const boardAvailableWidth=Math.max(210,window.innerWidth-(mobile?34:70));
 const availableHeight=Math.max(320,window.innerHeight-(mobile?235:300));
 const gap=mobile?1:2;
 const fitted=Math.floor(Math.min((boardAvailableWidth-(W-1)*gap)/W,(availableHeight-(H-1)*gap)/H));
-const size=mobile?Math.max(13,Math.min(40,fitted)):Math.min(40,Math.max(24,fitted));let b=$('board');b.style.setProperty('--cell',size+'px');b.style.gap=gap+'px';b.style.gridTemplateColumns=`repeat(${W},var(--cell))`;b.innerHTML='';for(let i=0;i<N;i++){let c=document.createElement('button');c.className='cell';c.type='button';c.setAttribute('aria-label',`행 ${Math.floor(i/W)+1}, 열 ${i%W+1}`);let holdTimer=null, longPressed=false, startX=0, startY=0, touchHandled=false;
+const size=mobile?Math.max(13,Math.min(40,fitted)):Math.min(40,Math.max(24,fitted));let b=$('board');b.style.setProperty('--cell',size+'px');b.style.gap=gap+'px';b.style.gridTemplateColumns=`repeat(${W},var(--cell))`;b.innerHTML='';for(let i=0;i<N;i++){let c=document.createElement('button');c.className='cell';c.type='button';c.setAttribute('aria-label',`행 ${Math.floor(i/W)+1}, 열 ${i%W+1}`);let holdTimer=null, longPressed=false, startX=0, startY=0, touchHandled=false, lastFlagTap=0;
 function clearHold(){if(holdTimer!==null){clearTimeout(holdTimer);holdTimer=null}}
 function tapCell(){
   if(revealed[i]){setMode('open');return}
-  if(flags[i]){if(mode==='remove'){toggleFlag(i)}else{setMode('flag')}return}
-  if(mode==='remove')return;
+  if(flags[i]){
+    const now=Date.now();
+    if(now-lastFlagTap<420){lastFlagTap=0;toggleFlag(i);$('status').textContent='🚩 깃발을 제거했습니다.';$('flag-tip').textContent='🚩❌ 더블터치로 깃발 제거됨';$('flag-tip').classList.add('done')}
+    else {lastFlagTap=now;setMode('flag')}
+    return;
+  }
   act(i);
 }
 function longFlag(){
   clearHold();
   if(longPressed)return;
   longPressed=true;
-  if(flags[i]){setMode('remove');$('status').textContent='❌ 깃발 제거 모드: 깃발을 터치하면 제거됩니다.'}
-  else if(!revealed[i]){setMode('flag');toggleFlag(i)}
+  if(!flags[i]&&!revealed[i]){setMode('flag');toggleFlag(i)}
   if(navigator.vibrate)navigator.vibrate(25);
 }
 // 터치 이벤트를 별도로 처리하여 모바일 브라우저의 길게 누르기 메뉴가
@@ -52,7 +75,7 @@ c.addEventListener('touchstart',e=>{
   touchHandled=true;longPressed=false;
   startX=e.touches[0].clientX;startY=e.touches[0].clientY;
   clearHold();
-  holdTimer=setTimeout(longFlag,flags[i]?1000:500);
+  if(!flags[i])holdTimer=setTimeout(longFlag,500);
 },{passive:false});
 c.addEventListener('touchmove',e=>{
   if(e.touches.length!==1){clearHold();return}
@@ -60,9 +83,9 @@ c.addEventListener('touchmove',e=>{
 },{passive:false});
 c.addEventListener('touchend',e=>{
   e.preventDefault();
-  const pending=holdTimer!==null;
+  const wasLong=longPressed;
   clearHold();
-  if(!longPressed&&pending)tapCell();
+  if(!wasLong)tapCell();
   // 뒤이어 발생할 합성 click 이벤트 무시
   setTimeout(()=>{touchHandled=false},450);
 },{passive:false});
@@ -70,7 +93,7 @@ c.addEventListener('touchcancel',()=>{clearHold();setTimeout(()=>{touchHandled=f
 c.addEventListener('click',e=>{if(touchHandled){e.preventDefault();return}tapCell()});
 c.addEventListener('contextmenu',e=>{e.preventDefault();if(!touchHandled)toggleFlag(i)});
 b.append(c)}render()}
-function render(){let cells=$('board').children;for(let i=0;i<N;i++){let c=cells[i];c.className='cell';c.textContent='';if(revealed[i]){c.classList.add('open');if(mines[i]){c.textContent='💣';c.classList.add('mine')}else if(nums[i]){c.textContent=nums[i];c.classList.add('n'+nums[i])}}else if(flags[i]){c.textContent='🚩';c.classList.add('flag')}}$('remaining').textContent=M-flags.filter(Boolean).length;$('opened').textContent=opened}
+function render(){let cells=$('board').children;for(let i=0;i<N;i++){let c=cells[i];c.className='cell';c.textContent='';if(revealed[i]){c.classList.add('open');if(mines[i]){c.textContent='💣';c.classList.add('mine')}else if(nums[i]){c.textContent=nums[i];c.classList.add('n'+nums[i])}}else if(flags[i]){c.textContent='🚩';c.classList.add('flag')}}$('remaining').textContent=M-flags.filter(Boolean).length;$('opened').textContent=opened;updateScore()}
 function putMines(firstIndex){let forbidden=new Set([firstIndex,...adj(firstIndex)]),available=[];for(let i=0;i<N;i++)if(!forbidden.has(i))available.push(i);for(let i=available.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[available[i],available[j]]=[available[j],available[i]]}mines=Array(N).fill(false);for(let i=0;i<M;i++)mines[available[i]]=true;nums=Array.from({length:N},(_,i)=>adj(i).filter(j=>mines[j]).length)}
 function flood(visible,idx){let stack=[idx];while(stack.length){let i=stack.pop();if(visible[i]||mines[i])continue;visible[i]=true;if(nums[i]===0)for(let j of adj(i))if(!visible[j]&&!mines[j])stack.push(j)}}
 // All reasoning uses visible cells and proven mines only, never hidden actual mine positions.
@@ -89,16 +112,15 @@ for(let i=0;i<solutions.length;i++){let s=solutions[i],possible=[];for(let [cnt,
 let outsidePossible=new Set();for(let cnt of prefix[solutions.length]){let extra=remaining-cnt;if(extra>=0&&extra<=outside)outsidePossible.add(extra)}if(outside>0&&outsidePossible.size===1){let val=[...outsidePossible][0];if(val===0||val===outside)for(let x of unseen)if(!frontier.has(x))(val===0?safe:bomb).add(x)}return {safe,bomb,depth:3}}
 function verify(firstIndex){let vis=Array(N).fill(false),known=new Set();flood(vis,firstIndex);let score=0;for(let steps=0;steps<N*2;steps++){if(vis.filter(Boolean).length===N-M)return {ok:true,score};let d=deduce(vis,known,2);if(!d.safe.size&&!d.bomb.size)return {ok:false,score};for(let x of d.bomb){if(!mines[x])return {ok:false,score};known.add(x)}for(let x of d.safe){if(mines[x])return {ok:false,score};flood(vis,x)}score+=d.depth}return {ok:false,score}}
 const sleep=()=>new Promise(r=>setTimeout(r,0));
-async function generate(firstIndex){busy=true;let token=generation;$('status').textContent='🧠 논리적으로 풀 수 있는 맵을 생성 중입니다…';$('restart').disabled=true;let found=false;const LIMIT=1200;for(let a=0;a<LIMIT;a++){if(token!==generation)return false;putMines(firstIndex);if(verify(firstIndex).ok){found=true;break}if(a%15===14)await sleep()}if(token!==generation)return false;busy=false;$('restart').disabled=false;if(!found){$('status').textContent='맵 생성에 실패했습니다. 다시 클릭하거나 난이도를 낮춰 주세요.';return false}first=false;startTime=Date.now();timerId=setInterval(()=>$('timer').textContent=Math.floor((Date.now()-startTime)/1000),250);$('status').textContent='논리로 풀 수 있는 맵입니다. 행운 대신 추리를 사용하세요!';return true}
-function reveal(idx){if(revealed[idx]||flags[idx])return;if(mines[idx]){revealed[idx]=true;over=true;clearInterval(timerId);for(let i=0;i<N;i++)if(mines[i])revealed[i]=true;render();$('board').children[idx].classList.add('hit');$('status').textContent='💥 지뢰를 밟았습니다. 다시 도전하세요!';return}let before=revealed.slice();flood(revealed,idx);opened+=revealed.filter((v,i)=>v&&!before[i]).length;render();if(opened===N-M){over=true;clearInterval(timerId);$('status').textContent='🏆 성공! 추측 없이 모든 안전 칸을 찾았습니다!'}}
-async function act(idx){if(over||busy||revealed[idx])return;if(mode==='remove')return;if(flagMode){toggleFlag(idx);return}if(flags[idx])return;if(first){let ok=await generate(idx);if(!ok)return}reveal(idx)}
-function toggleFlag(idx){if(over||busy||revealed[idx])return;flags[idx]=!flags[idx];render()}
+async function generate(firstIndex){busy=true;let token=generation;$('status').textContent='🧠 논리적으로 풀 수 있는 맵을 생성 중입니다…';$('restart').disabled=true;let found=false;const LIMIT=1200;for(let a=0;a<LIMIT;a++){if(token!==generation)return false;putMines(firstIndex);if(verify(firstIndex).ok){found=true;break}if(a%15===14)await sleep()}if(token!==generation)return false;busy=false;$('restart').disabled=false;if(!found){$('status').textContent='맵 생성에 실패했습니다. 다시 클릭하거나 난이도를 낮춰 주세요.';return false}first=false;startTime=Date.now();timerId=setInterval(()=>{$('timer').textContent=elapsed();updateScore()},250);$('status').textContent='논리로 풀 수 있는 맵입니다. 행운 대신 추리를 사용하세요!';return true}
+function reveal(idx){if(revealed[idx]||flags[idx])return;if(mines[idx]){revealed[idx]=true;over=true;clearInterval(timerId);for(let i=0;i<N;i++)if(mines[i])revealed[i]=true;render();$('board').children[idx].classList.add('hit');$('status').textContent='💥 지뢰를 밟았습니다. 다시 도전하세요!';return}let before=revealed.slice();flood(revealed,idx);opened+=revealed.filter((v,i)=>v&&!before[i]).length;render();checkWin()}
+async function act(idx){if(over||busy||revealed[idx])return;if(flagMode){toggleFlag(idx);return}if(flags[idx])return;if(first){let ok=await generate(idx);if(!ok)return}reveal(idx)}
+function toggleFlag(idx){if((over && opened!==N-M)||busy||revealed[idx])return;flags[idx]=!flags[idx];render();checkWin()}
 function setMode(next){
   mode=next;flagMode=next==='flag';
   for(const [id,kind,description] of [
     ['openmode','open','터치해서 열기'],
-    ['flagmode','flag','터치해서 표시'],
-    ['removemode','remove','깃발을 터치']]){
+    ['flagmode','flag','터치해서 표시']]){
     const el=$(id),active=mode===kind;
     el.classList.toggle('selected',active);
     el.setAttribute('aria-pressed',String(active));
@@ -108,10 +130,11 @@ function setMode(next){
 $('restart').onclick=setup;$('level').onchange=setup;
 $('openmode').onclick=()=>setMode('open');
 $('flagmode').onclick=()=>setMode('flag');
-$('removemode').onclick=()=>setMode('remove');
+
+$('clear-scores').onclick=()=>{if(confirm('현재 기기에 저장된 모든 난이도 기록을 삭제할까요?')){try{localStorage.removeItem(SCORE_KEY)}catch{}scoreBoard()}};
 $('hint').onclick=()=>{if(first||busy||over){$('status').textContent='먼저 게임을 시작해 주세요.';return}let known=new Set();for(let i=0;i<N;i++)if(flags[i])known.add(i); // Flags are user claims; incorrect flags cannot be trusted.
 // Derive proven mines independently instead.
-known.clear();let d,vis=revealed.slice();for(let j=0;j<N;j++){d=deduce(vis,known,2);if(d.safe.size){let idx=[...d.safe].find(i=>!flags[i]);if(idx===undefined)idx=[...d.safe][0];$('status').textContent=`💡 ${Math.floor(idx/W)+1}행 ${idx%W+1}열은 논리적으로 안전합니다. (추론 단계 ${d.depth})`;let c=$('board').children[idx];c.animate([{outline:'3px solid #ffdb66'},{outline:'3px solid transparent'}],{duration:1300,iterations:2});return}if(!d.bomb.size)break;let added=false;for(let x of d.bomb)if(!known.has(x)){known.add(x);added=true}if(!added)break}$('status').textContent='현재 공개된 정보에서 안전한 칸을 찾지 못했습니다. 잘못 놓은 깃발이 있는지 확인해 주세요.'};
+known.clear();let d,vis=revealed.slice();for(let j=0;j<N;j++){d=deduce(vis,known,2);if(d.safe.size){let idx=[...d.safe].find(i=>!flags[i]);if(idx===undefined)idx=[...d.safe][0];hintsUsed++;updateScore();$('status').textContent=`💡 ${Math.floor(idx/W)+1}행 ${idx%W+1}열은 논리적으로 안전합니다. (추론 단계 ${d.depth})`;let c=$('board').children[idx];c.animate([{outline:'3px solid #ffdb66'},{outline:'3px solid transparent'}],{duration:1300,iterations:2});return}if(!d.bomb.size)break;let added=false;for(let x of d.bomb)if(!known.has(x)){known.add(x);added=true}if(!added)break}$('status').textContent='현재 공개된 정보에서 안전한 칸을 찾지 못했습니다. 잘못 놓은 깃발이 있는지 확인해 주세요.'};
 window.addEventListener('resize',()=>{
  const mobile=window.innerWidth<=650,gap=mobile?1:2;
  const availableWidth=Math.max(210,window.innerWidth-(mobile?34:70));
