@@ -125,11 +125,6 @@ body{padding-bottom:max(80px,calc(env(safe-area-inset-bottom,0px) + 56px))!impor
 'use strict';
 // Keep essential controls visible; let players reveal optional panels.
 window.addEventListener('DOMContentLoaded',()=>{
-const LEVEL_STORAGE_KEY='pure_logic_selected_level';
-try{
- const savedLevel=localStorage.getItem(LEVEL_STORAGE_KEY);
- if(savedLevel!==null && [...$('level').options].some(o=>o.value===savedLevel)) $('level').value=savedLevel;
-}catch(e){}
 
   const toggle=document.getElementById('ui-toggle');
   if(!toggle)return;
@@ -398,5 +393,13 @@ window.addEventListener('resize',()=>{
  const size=mobile?Math.max(13,Math.min(40,fitted)):Math.min(40,Math.max(24,fitted));
  if(W<25){zoomSize=size;applyZoom()}$('board').style.gap=gap+'px';
 });
+// Restore the saved difficulty BEFORE the initial setup() builds the board.
+const LEVEL_STORAGE_KEY='pure_logic_selected_level';
+try {
+  const savedLevel=localStorage.getItem(LEVEL_STORAGE_KEY);
+  if(savedLevel!==null && Array.from($('level').options).some(option=>option.value===savedLevel)) {
+    $('level').value=savedLevel;
+  }
+} catch(e) {}
 setup();
 </script></body></html>
