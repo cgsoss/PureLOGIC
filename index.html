@@ -196,7 +196,7 @@ $('victory-close').onclick=hideVictory;
 $('victory-restart').onclick=()=>{hideVictory();setup()};
 
 function checkWin(){if(over||first)return;const correct=flags.every((f,i)=>f===mines[i]);if(opened===N-M&&correct){clearInterval(timerId);updateScore();const points=saveScore();over=true;playSound('win');showVictory(points);showReady('good','🏆 완전 클리어!','모든 지뢰에 깃발을 정확하게 설치했습니다.');$('status').textContent=`🏆 완전 클리어! 모든 안전 칸과 지뢰 깃발을 정확히 맞혔습니다. ${points.toLocaleString()}점!`;return}if(opened===N-M){let flagged=flags.filter(Boolean).length;$('status').textContent=`✨ 안전 칸 완료! 남은 지뢰에 정확히 깃발을 표시하세요. (${flagged}/${M})`}}
-let firstMovePending=true, validatedStartIndex=-1, verifiedBoard=false;let zoomSize=32,panMode=false;let pinchActive=false,pinchUntil=0;function applyZoom(){let b=$('board');b.style.setProperty('--cell',zoomSize+'px');$('zoom-level').textContent=Math.round(zoomSize/32*100)+'%'}function setPan(v){panMode=v;$('boardwrap').classList.toggle('pan-active',v);}$('zoom-in').onclick=()=>{zoomSize=Math.min(64,zoomSize+5);applyZoom()};$('zoom-out').onclick=()=>{zoomSize=Math.max(12,zoomSize-5);applyZoom()};$('zoom-fit').onclick=()=>{zoomSize=Math.max(12,Math.min(40,Math.floor(($('boardwrap').clientWidth-12)/W)-2));applyZoom()};function setup(){hideVictory();showLoadingPopup(false);generation++;if(generationWorker){generationWorker.terminate();generationWorker=null}soundButton();$('flag-tip').textContent='🚩 깃발 두 번 터치 → 제거';$('flag-tip').classList.remove('done');[W,H,M]=presets[+$('level').value];N=W*H;mines=Array(N).fill(false);nums=Array(N).fill(0);revealed=Array(N).fill(false);flags=Array(N).fill(false);first=true;firstMovePending=true;validatedStartIndex=-1;verifiedBoard=false;over=false;busy=false;opened=0;hintsUsed=0;flagMode=false;clearInterval(timerId);$('timer').textContent='0';$('status').textContent='⏳ 난이도에 맞는 맵을 자동으로 생성합니다…';setMode('open');$('restart').disabled=false;scoreBoard();updateScore();const mobile=window.innerWidth<=650;
+let firstMovePending=true, validatedStartIndex=-1, verifiedBoard=false;let zoomSize=32,panMode=false;let pinchActive=false,pinchUntil=0;function applyZoom(){let b=$('board');b.style.setProperty('--cell',zoomSize+'px');$('zoom-level').textContent=Math.round(zoomSize/32*100)+'%'}function setPan(v){panMode=v;$('boardwrap').classList.toggle('pan-active',v);}$('zoom-in').onclick=()=>{zoomSize=Math.min(64,zoomSize+5);applyZoom()};$('zoom-out').onclick=()=>{zoomSize=Math.max(12,zoomSize-5);applyZoom()};$('zoom-fit').onclick=()=>{zoomSize=Math.max(12,Math.min(40,Math.floor(($('boardwrap').clientWidth-12)/W)-2));applyZoom()};function setup(){saveSelectedDifficulty();hideVictory();showLoadingPopup(false);generation++;if(generationWorker){generationWorker.terminate();generationWorker=null}soundButton();$('flag-tip').textContent='🚩 깃발 두 번 터치 → 제거';$('flag-tip').classList.remove('done');[W,H,M]=presets[+$('level').value];N=W*H;mines=Array(N).fill(false);nums=Array(N).fill(0);revealed=Array(N).fill(false);flags=Array(N).fill(false);first=true;firstMovePending=true;validatedStartIndex=-1;verifiedBoard=false;over=false;busy=false;opened=0;hintsUsed=0;flagMode=false;clearInterval(timerId);$('timer').textContent='0';$('status').textContent='⏳ 난이도에 맞는 맵을 자동으로 생성합니다…';setMode('open');$('restart').disabled=false;scoreBoard();updateScore();const mobile=window.innerWidth<=650;
 const boardAvailableWidth=Math.max(210,window.innerWidth-(mobile?34:70));
 const availableHeight=Math.max(320,window.innerHeight-(mobile?235:300));
 const gap=mobile?1:2;
@@ -374,7 +374,7 @@ function setMode(next){
 })();
 function setControlStyle(next){controlStyle=next;for(const [id,kind] of [['manual-control','manual'],['auto-control','auto']]){const b=$(id),active=next===kind;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active))}}
 $('manual-control').onclick=()=>setControlStyle('manual');$('auto-control').onclick=()=>setControlStyle('auto');
-$('restart').onclick=()=>{const currentLevel=$('level').value;setup();$('level').value=currentLevel};$('level').onchange=()=>{
+$('restart').onclick=()=>{saveSelectedDifficulty();setup()};$('level').onchange=()=>{
  try{localStorage.setItem(LEVEL_STORAGE_KEY,$('level').value)}catch(e){}
  setup();
 };
@@ -393,13 +393,32 @@ window.addEventListener('resize',()=>{
  const size=mobile?Math.max(13,Math.min(40,fitted)):Math.min(40,Math.max(24,fitted));
  if(W<25){zoomSize=size;applyZoom()}$('board').style.gap=gap+'px';
 });
-// Restore the saved difficulty BEFORE the initial setup() builds the board.
+// Persistent difficulty: restore before first board setup, and save every change.
 const LEVEL_STORAGE_KEY='pure_logic_selected_level';
-try {
-  const savedLevel=localStorage.getItem(LEVEL_STORAGE_KEY);
-  if(savedLevel!==null && Array.from($('level').options).some(option=>option.value===savedLevel)) {
-    $('level').value=savedLevel;
+const levelSelect=$('level');
+function saveSelectedDifficulty(){
+  const value=levelSelect.value;
+  if(!presets[Number(value)])return;
+  try{localStorage.setItem(LEVEL_STORAGE_KEY,value)}catch(e){}
+  try{document.cookie='pure_logic_level='+encodeURIComponent(value)+'; max-age=31536000; path=/; SameSite=Lax'}catch(e){}
+}
+function restoreSelectedDifficulty(){
+  let saved=null;
+  try{saved=localStorage.getItem(LEVEL_STORAGE_KEY)}catch(e){}
+  if(saved===null){
+    try{saved=decodeURIComponent((document.cookie.match(/(?:^|; )pure_logic_level=([^;]*)/)||[])[1]||'')}catch(e){}
   }
-} catch(e) {}
+  if(saved!==null && [...levelSelect.options].some(o=>o.value===saved)){
+    levelSelect.value=saved;
+  }
+}
+restoreSelectedDifficulty();
+levelSelect.addEventListener('input',saveSelectedDifficulty);
+levelSelect.addEventListener('change',saveSelectedDifficulty);
+window.addEventListener('pagehide',saveSelectedDifficulty);
+window.addEventListener('pageshow',event=>{
+  if(event.persisted){restoreSelectedDifficulty();setup();}
+});
+saveSelectedDifficulty();
 setup();
 </script></body></html>
