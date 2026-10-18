@@ -128,7 +128,12 @@ body{padding-bottom:max(80px,calc(env(safe-area-inset-bottom,0px) + 56px))!impor
 .boardwrap .board{margin:0 auto!important;}
 @media(max-width:650px){.boardwrap{padding:36px!important;}}
 </style>
-</head><body class="compact-ui"><main><div class="top-layout"><div class="brand"><div class="brand-row"><h1>💣 PURE LOGIC</h1><button id="ui-toggle" type="button" class="ui-toggle" aria-pressed="true">☰ 전체 UI</button><div class="control-style"><span>조작 방식</span><button type="button" id="manual-control" class="control-style-button selected" aria-pressed="true">수동</button><button type="button" id="auto-control" class="control-style-button" aria-pressed="false">자동</button><button class="primary" id="restart">↻ 새 게임</button></div></div><p class="sub">눌러서 입체 블록을 열어보세요 · No Guess</p></div><section class="panel scoreboard"><div class="score-heading"><strong>🏆 난이도별 최고 기록</strong><button type="button" id="clear-scores">기록 초기화</button></div><div id="score-list">아직 기록이 없습니다.</div><p class="score-note">안전한 칸을 모두 열고 모든 지뢰에 정확히 깃발을 꽂으면 클리어! 기록은 이 브라우저에 저장됩니다.</p></section></div><section class="panel"><div class="controls"><label for="level">난이도</label><select id="level"><option value="0">입문 · 8×8 / 8개</option><option value="1">초급 · 9×9 / 10개</option><option value="2">중급 · 12×12 / 24개</option><option value="3">상급 · 16×16 / 40개</option><option value="4">전문가 · 20×20 / 75개</option><option value="5">마스터 · 25×25 / 115개</option><option value="6">그랜드마스터 · 30×30 / 165개</option><option value="7">챌린저 · 40×40 / 290개</option><option value="8">엘리트 · 50×50 / 450개</option><option value="9">레전드 · 60×60 / 650개</option><option value="10">신화 · 80×80 / 1,150개</option><option value="11">초월 · 100×100 / 1,800개</option></select><button id="hint">💡 논리 힌트</button><button id="sound-toggle" type="button" aria-pressed="true">🔊 소리 켜짐</button><span id="flag-tip" class="flag-tip" role="status">🚩 깃발 두 번 터치 → 제거</span></div><div class="action-modes" role="group" aria-label="터치 동작 선택"><button type="button" id="openmode" class="action-mode selected" aria-pressed="true"><span class="mode-icon">👆</span><strong>칸 열기</strong><small>✓ 선택됨</small></button><button type="button" id="flagmode" class="action-mode" aria-pressed="false"><span class="mode-icon">🚩</span><strong>깃발 놓기</strong><small>터치해서 표시</small></button></div><p class="touch-guide">수동(기본): 위 버튼으로 칸 열기/깃발 선택 · 자동: 열린 숫자/깃발을 눌러 모드 변경 · 깃발 두 번 터치 = 제거</p><div class="stats"><div>💣 <span>남은 지뢰</span> <b id="remaining">0</b></div><div>⏱️ <span>시간</span> <b id="timer">0</b>초</div><div>🔎 <span>열린 칸</span> <b id="opened">0</b></div></div><div class="score-summary">🏅 현재 점수 <b id="live-score">0</b> <span>· 💡 힌트 <b id="hint-count">0</b>회</span></div></section><div class="status" id="status" role="status">맵 준비가 완료되면 플레이할 수 있습니다.</div><div class="zoom-toolbar"><button type="button" id="zoom-out">− 축소</button><span id="zoom-level">100%</span><button type="button" id="zoom-in">＋ 확대</button><button type="button" id="zoom-fit">화면 맞춤</button></div><p class="zoom-note">한 손가락으로 밀면 이동하고, 두 손가락을 벌리거나 오므리면 확대·축소합니다. 짧게 터치하면 칸을 선택합니다. 길게 누르면 깃발을 설치합니다.</p><div class="boardwrap" id="boardwrap"><div id="board-loading" class="board-loading-overlay" role="dialog" aria-modal="true" aria-labelledby="board-loading-title" aria-hidden="true"><div class="board-loading-card"><span class="board-loading-spinner" aria-hidden="true"></span><strong id="board-loading-title">⏳ 맵 생성 중</strong><p id="board-loading-detail">난이도에 맞는 맵을 자동 생성 중입니다. 준비가 끝나면 모든 칸이 닫힌 게임판이 나타납니다.</p><small>잠시 기다려 주세요</small></div></div><div id="board" class="board" role="grid" aria-label="지뢰찾기 게임판"></div></div><section class="panel help" style="margin-top:16px"><strong>게임 방법</strong><p>휴대폰: 기본은 수동 모드이며 위 칸 열기/깃발 놓기 버튼으로 동작을 선택합니다. 자동 모드를 선택하면 열린 숫자 칸을 터치할 때 칸 열기 모드, 깃발 칸을 터치할 때 깃발 놓기 모드로 전환됩니다. 깃발을 두 번 빠르게 터치하면 제거됩니다. 위쪽 버튼도 사용할 수 있습니다. 빈 칸을 0.5초 길게 누르면 깃발을 놓습니다. 깃발을 빠르게 두 번 터치하면 깃발이 바로 제거됩니다. PC: 왼쪽 클릭은 선택한 동작, 오른쪽 클릭은 깃발입니다. 자동으로 열리는 시작 칸과 주변 8칸은 안전합니다. 숫자는 주변 8칸의 지뢰 개수입니다. 모든 안전한 칸을 열고 실제 지뢰에 깃발을 모두 정확히 표시하면 승리합니다.</p><p><strong>No Guess 보장:</strong> 시작할 때 실제 논리 풀이 엔진으로 검증한 맵만 사용합니다. 난이도를 선택하면 맵을 자동으로 생성합니다. 생성 중에는 게임판을 조작할 수 없습니다. 힌트는 현재 공개된 정보에서 논리적으로 확정되는 안전 칸을 찾아줍니다.</p></section></main><div id="victory-overlay" role="dialog" aria-modal="true" aria-labelledby="victory-title"><canvas id="victory-confetti" aria-hidden="true"></canvas><section class="victory-card"><div class="victory-trophy" aria-hidden="true">🏆</div><h2 id="victory-title">완전 클리어!</h2><p>모든 안전 칸과 지뢰 깃발을 맞혔어요!</p><div class="victory-points" id="victory-points">0점</div><p class="victory-meta" id="victory-meta"></p><div class="victory-actions"><button id="victory-close" type="button">결과 보기</button><button class="primary" id="victory-restart" type="button">다시 도전</button></div></section></div><script>
+<style id="online-ranking-style">
+.online-name{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.online-name input{min-width:120px;max-width:200px;flex:1;padding:9px;border-radius:8px;border:1px solid #72849c;background:#152238;color:#fff;font-size:14px}
+.online-name button{padding:8px}
+.victory-register{margin:14px auto 0;text-align:left;max-width:350px}.victory-register label{display:block;margin-bottom:7px;font-weight:800;color:#fff}.victory-register-row{display:flex;gap:7px}.victory-register-row input{min-width:0;flex:1;border-radius:8px;padding:10px;border:1px solid #93a5bd;background:#eef2f8;color:#172335;font-size:16px}.victory-register-row button{white-space:nowrap}.victory-register p{font-size:12px;margin:8px 0 0;color:#dce9ff}.victory-register button:disabled{opacity:.6}#victory-register[hidden]{display:none!important}
+</style></head><body class="compact-ui"><main><div class="top-layout"><div class="brand"><div class="brand-row"><h1>💣 PURE LOGIC</h1><button id="ui-toggle" type="button" class="ui-toggle" aria-pressed="true">☰ 전체 UI</button><div class="control-style"><span>조작 방식</span><button type="button" id="manual-control" class="control-style-button selected" aria-pressed="true">수동</button><button type="button" id="auto-control" class="control-style-button" aria-pressed="false">자동</button><button class="primary" id="restart">↻ 새 게임</button></div></div><p class="sub">눌러서 입체 블록을 열어보세요 · No Guess</p></div><section class="panel scoreboard"><div class="score-heading"><strong>🌍 난이도별 온라인 TOP 5</strong><button type="button" id="clear-scores">내 기록 초기화</button></div><div class="online-name"><button id="online-refresh" type="button">↻ 랭킹 갱신</button></div><div id="online-message" role="status" class="score-note"></div><div id="score-list">아직 기록이 없습니다.</div><p class="score-note">안전한 칸을 모두 열고 모든 지뢰에 정확히 깃발을 꽂으면 클리어! 온라인 랭킹은 전체 플레이어가 공유합니다. 인터넷 연결이 필요합니다.</p></section></div><section class="panel"><div class="controls"><label for="level">난이도</label><select id="level"><option value="0">입문 · 8×8 / 8개</option><option value="1">초급 · 9×9 / 10개</option><option value="2">중급 · 12×12 / 24개</option><option value="3">상급 · 16×16 / 40개</option><option value="4">전문가 · 20×20 / 75개</option><option value="5">마스터 · 25×25 / 115개</option><option value="6">그랜드마스터 · 30×30 / 165개</option><option value="7">챌린저 · 40×40 / 290개</option><option value="8">엘리트 · 50×50 / 450개</option><option value="9">레전드 · 60×60 / 650개</option><option value="10">신화 · 80×80 / 1,150개</option><option value="11">초월 · 100×100 / 1,800개</option></select><button id="hint">💡 논리 힌트</button><button id="sound-toggle" type="button" aria-pressed="true">🔊 소리 켜짐</button><span id="flag-tip" class="flag-tip" role="status">🚩 깃발 두 번 터치 → 제거</span></div><div class="action-modes" role="group" aria-label="터치 동작 선택"><button type="button" id="openmode" class="action-mode selected" aria-pressed="true"><span class="mode-icon">👆</span><strong>칸 열기</strong><small>✓ 선택됨</small></button><button type="button" id="flagmode" class="action-mode" aria-pressed="false"><span class="mode-icon">🚩</span><strong>깃발 놓기</strong><small>터치해서 표시</small></button></div><p class="touch-guide">수동(기본): 위 버튼으로 칸 열기/깃발 선택 · 자동: 열린 숫자/깃발을 눌러 모드 변경 · 깃발 두 번 터치 = 제거</p><div class="stats"><div>💣 <span>남은 지뢰</span> <b id="remaining">0</b></div><div>⏱️ <span>시간</span> <b id="timer">0</b>초</div><div>🔎 <span>열린 칸</span> <b id="opened">0</b></div></div><div class="score-summary">🏅 현재 점수 <b id="live-score">0</b> <span>· 💡 힌트 <b id="hint-count">0</b>회</span></div></section><div class="status" id="status" role="status">맵 준비가 완료되면 플레이할 수 있습니다.</div><div class="zoom-toolbar"><button type="button" id="zoom-out">− 축소</button><span id="zoom-level">100%</span><button type="button" id="zoom-in">＋ 확대</button><button type="button" id="zoom-fit">화면 맞춤</button></div><p class="zoom-note">한 손가락으로 밀면 이동하고, 두 손가락을 벌리거나 오므리면 확대·축소합니다. 짧게 터치하면 칸을 선택합니다. 길게 누르면 깃발을 설치합니다.</p><div class="boardwrap" id="boardwrap"><div id="board-loading" class="board-loading-overlay" role="dialog" aria-modal="true" aria-labelledby="board-loading-title" aria-hidden="true"><div class="board-loading-card"><span class="board-loading-spinner" aria-hidden="true"></span><strong id="board-loading-title">⏳ 맵 생성 중</strong><p id="board-loading-detail">난이도에 맞는 맵을 자동 생성 중입니다. 준비가 끝나면 모든 칸이 닫힌 게임판이 나타납니다.</p><small>잠시 기다려 주세요</small></div></div><div id="board" class="board" role="grid" aria-label="지뢰찾기 게임판"></div></div><section class="panel help" style="margin-top:16px"><strong>게임 방법</strong><p>휴대폰: 기본은 수동 모드이며 위 칸 열기/깃발 놓기 버튼으로 동작을 선택합니다. 자동 모드를 선택하면 열린 숫자 칸을 터치할 때 칸 열기 모드, 깃발 칸을 터치할 때 깃발 놓기 모드로 전환됩니다. 깃발을 두 번 빠르게 터치하면 제거됩니다. 위쪽 버튼도 사용할 수 있습니다. 빈 칸을 0.5초 길게 누르면 깃발을 놓습니다. 깃발을 빠르게 두 번 터치하면 깃발이 바로 제거됩니다. PC: 왼쪽 클릭은 선택한 동작, 오른쪽 클릭은 깃발입니다. 자동으로 열리는 시작 칸과 주변 8칸은 안전합니다. 숫자는 주변 8칸의 지뢰 개수입니다. 모든 안전한 칸을 열고 실제 지뢰에 깃발을 모두 정확히 표시하면 승리합니다.</p><p><strong>No Guess 보장:</strong> 시작할 때 실제 논리 풀이 엔진으로 검증한 맵만 사용합니다. 난이도를 선택하면 맵을 자동으로 생성합니다. 생성 중에는 게임판을 조작할 수 없습니다. 힌트는 현재 공개된 정보에서 논리적으로 확정되는 안전 칸을 찾아줍니다.</p></section></main><div id="victory-overlay" role="dialog" aria-modal="true" aria-labelledby="victory-title"><canvas id="victory-confetti" aria-hidden="true"></canvas><section class="victory-card"><div class="victory-trophy" aria-hidden="true">🏆</div><h2 id="victory-title">완전 클리어!</h2><p>모든 안전 칸과 지뢰 깃발을 맞혔어요!</p><div class="victory-points" id="victory-points">0점</div><p class="victory-meta" id="victory-meta"></p><div class="victory-register" id="victory-register"><label for="player-name">🌍 온라인 랭킹 등록 닉네임</label><div class="victory-register-row"><input id="player-name" type="text" maxlength="20" placeholder="닉네임 (최대 20자)" autocomplete="nickname"><button id="register-score" type="button" class="primary">랭킹 등록</button></div><p id="victory-register-status" role="status">클리어 기록을 온라인 랭킹에 등록할 수 있어요.</p></div><div class="victory-actions"><button id="victory-close" type="button">결과 보기</button><button class="primary" id="victory-restart" type="button">다시 도전</button></div></section></div><script>
 'use strict';
 // Keep essential controls visible; let players reveal optional panels.
 window.addEventListener('DOMContentLoaded',()=>{
@@ -179,12 +184,74 @@ const SCORE_KEY='pure_logic_records_v1';
 function readScores(){try{let v=JSON.parse(localStorage.getItem(SCORE_KEY)||'{}');return v&&typeof v==='object'?v:{}}catch{return {}}}
 function elapsed(){return first?0:Math.floor((Date.now()-startTime)/1000)}
 function scoreValue(){return Math.max(0,Math.round((M*35+N*3+500-elapsed()*2-hintsUsed*75)))}
-function scoreBoard(){let list=readScores()[String($('level').value)]||[];$('score-list').innerHTML='';if(!list.length){$('score-list').textContent='아직 기록이 없습니다. 첫 번째 기록에 도전하세요!';return}list.slice(0,5).forEach((r,i)=>{let row=document.createElement('div');row.className='score-row';let rank=document.createElement('strong');rank.textContent=(i+1)+'위';let info=document.createElement('span');info.className='muted';info.textContent=`${r.seconds}초 · 힌트 ${r.hints}회 · ${r.date}`;let points=document.createElement('strong');points.textContent=r.score.toLocaleString()+'점';row.append(rank,info,points);$('score-list').append(row)})}
+function scoreBoard(){loadOnlineRanking()}
 function updateScore(){$('live-score').textContent=scoreValue().toLocaleString();$('hint-count').textContent=hintsUsed}
+const ONLINE_URL='https://script.google.com/macros/s/AKfycbyTCO0Vl7fdBlJK7Rp3ECGhzNTDIELEJn8vehUr_rRGuU-SXF5NAE7ua6M-fzjNDQ-H/exec';
+const NAME_KEY='pure_logic_online_nickname_v1';
+let onlineSeq=0;
+function onlineStatus(msg){$('online-message').textContent=msg}
+function loadOnlineRanking(){
+ const level=String($('level').value),seq=++onlineSeq;
+ const list=$('score-list');list.textContent='온라인 랭킹 불러오는 중…';
+ const callback='pureLogicRank'+seq;
+ const script=document.createElement('script');
+ let finished=false;
+ const timeout=setTimeout(()=>finish(null),12000);
+ function finish(data){
+  if(finished)return;finished=true;clearTimeout(timeout);script.remove();
+  try{delete window[callback]}catch(e){window[callback]=undefined}
+  if(seq!==onlineSeq)return;
+  if(!data||!data.ok){list.textContent='랭킹을 불러오지 못했습니다. 인터넷 연결과 웹앱 배포를 확인해 주세요.';return}
+  list.replaceChildren();
+  const rows=Array.isArray(data.ranking)?data.ranking:[];
+  if(!rows.length){list.textContent='아직 등록된 기록이 없습니다.';return}
+  rows.forEach((r,i)=>{
+   const row=document.createElement('div');row.className='score-row';
+   const rank=document.createElement('strong');rank.textContent=(i+1)+'위';
+   const name=document.createElement('span');name.className='muted';name.textContent=String(r.name||'익명').slice(0,25);
+   const time=document.createElement('strong');time.textContent=Number(r.seconds)+'초';
+   row.append(rank,name,time);list.append(row);
+  });
+ }
+ window[callback]=finish;
+ script.onerror=()=>finish(null);
+ script.src=ONLINE_URL+'?level='+encodeURIComponent(level)+'&callback='+callback+'&_='+Date.now();
+ document.head.append(script);
+}
+let pendingOnlineScore=null;
+function prepareOnlineRegistration(points){
+ pendingOnlineScore={level:String($('level').value),seconds:Math.max(1,elapsed()),score:points,verified:verifiedBoard};
+ $('victory-register').hidden=false;
+ $('register-score').disabled=false;
+ $('victory-register-status').textContent='닉네임을 입력하고 랭킹 등록을 눌러주세요. 등록하지 않고 닫아도 됩니다.';
+}
+function submitOnlineScore(){
+ const name=$('player-name').value.trim(),record=pendingOnlineScore;
+ if(!record)return;
+ if(!name){$('victory-register-status').textContent='닉네임을 입력해 주세요.';$('player-name').focus();return}
+ if(!record.verified){$('victory-register-status').textContent='검증된 No Guess 맵이 아니므로 온라인 기록을 등록할 수 없어요.';return}
+ try{localStorage.setItem(NAME_KEY,name)}catch(e){}
+ $('register-score').disabled=true;
+ $('victory-register-status').textContent='온라인 기록을 전송하고 있어요…';
+ const frame=document.createElement('iframe');frame.name='ranking_submit_'+Date.now();frame.style.display='none';document.body.append(frame);
+ const form=document.createElement('form');form.method='POST';form.action=ONLINE_URL;form.target=frame.name;form.style.display='none';
+ for(const [key,value] of Object.entries({name,level:record.level,seconds:record.seconds,score:record.score})){
+  const input=document.createElement('input');input.name=key;input.value=String(value);form.append(input);
+ }
+ document.body.append(form);
+ frame.addEventListener('load',()=>{$('victory-register-status').textContent='전송을 마쳤어요. 실제 등록 여부는 온라인 랭킹에서 확인해 주세요.';onlineStatus('온라인 기록을 제출했어요.');setTimeout(loadOnlineRanking,1200)});
+ form.submit();form.remove();pendingOnlineScore=null;
+ setTimeout(()=>{frame.remove();loadOnlineRanking()},7000);
+}
+$('register-score').onclick=submitOnlineScore;
+$('player-name').addEventListener('keydown',e=>{if(e.key==='Enter')submitOnlineScore()});
+try{$('player-name').value=localStorage.getItem(NAME_KEY)||''}catch(e){}
+$('player-name').addEventListener('input',()=>{try{localStorage.setItem(NAME_KEY,$('player-name').value.trim())}catch(e){}});
+$('online-refresh').onclick=loadOnlineRanking;
 function saveScore(){let all=readScores(),key=String($('level').value);let date=new Date().toLocaleDateString('ko-KR');let entry={score:scoreValue(),seconds:elapsed(),hints:hintsUsed,date};all[key]=[...(all[key]||[]),entry].sort((a,b)=>b.score-a.score||a.seconds-b.seconds).slice(0,5);try{localStorage.setItem(SCORE_KEY,JSON.stringify(all))}catch{}scoreBoard();return entry.score}
 
 let confettiFrame=0, confettiTimeout=0;
-function hideVictory(){const overlay=$('victory-overlay');overlay.classList.remove('show');cancelAnimationFrame(confettiFrame);clearTimeout(confettiTimeout)}
+function hideVictory(){pendingOnlineScore=null;const overlay=$('victory-overlay');overlay.classList.remove('show');cancelAnimationFrame(confettiFrame);clearTimeout(confettiTimeout)}
 function showVictory(points){
  $('victory-points').textContent=points.toLocaleString('ko-KR')+'점';
  $('victory-meta').textContent=`⏱ ${elapsed()}초 · 💡 힌트 ${hintsUsed}회`;
@@ -202,7 +269,7 @@ function showVictory(points){
 $('victory-close').onclick=hideVictory;
 $('victory-restart').onclick=()=>{hideVictory();setup()};
 
-function checkWin(){if(over||first)return;const correct=flags.every((f,i)=>f===mines[i]);if(opened===N-M&&correct){clearInterval(timerId);updateScore();const points=saveScore();over=true;playSound('win');showVictory(points);showReady('good','🏆 완전 클리어!','모든 지뢰에 깃발을 정확하게 설치했습니다.');$('status').textContent=`🏆 완전 클리어! 모든 안전 칸과 지뢰 깃발을 정확히 맞혔습니다. ${points.toLocaleString()}점!`;return}if(opened===N-M){let flagged=flags.filter(Boolean).length;$('status').textContent=`✨ 안전 칸 완료! 남은 지뢰에 정확히 깃발을 표시하세요. (${flagged}/${M})`}}
+function checkWin(){if(over||first)return;const correct=flags.every((f,i)=>f===mines[i]);if(opened===N-M&&correct){clearInterval(timerId);updateScore();const points=saveScore();over=true;prepareOnlineRegistration(points);playSound('win');showVictory(points);showReady('good','🏆 완전 클리어!','모든 지뢰에 깃발을 정확하게 설치했습니다.');$('status').textContent=`🏆 완전 클리어! 모든 안전 칸과 지뢰 깃발을 정확히 맞혔습니다. ${points.toLocaleString()}점!`;return}if(opened===N-M){let flagged=flags.filter(Boolean).length;$('status').textContent=`✨ 안전 칸 완료! 남은 지뢰에 정확히 깃발을 표시하세요. (${flagged}/${M})`}}
 let firstMovePending=true, validatedStartIndex=-1, verifiedBoard=false;let zoomSize=32,panMode=false;let pinchActive=false,pinchUntil=0;function applyZoom(){let b=$('board');b.style.setProperty('--cell',zoomSize+'px');$('zoom-level').textContent=Math.round(zoomSize/32*100)+'%'}function setPan(v){panMode=v;$('boardwrap').classList.toggle('pan-active',v);}$('zoom-in').onclick=()=>{zoomSize=Math.min(64,zoomSize+5);applyZoom()};$('zoom-out').onclick=()=>{zoomSize=Math.max(12,zoomSize-5);applyZoom()};$('zoom-fit').onclick=()=>{zoomSize=Math.max(12,Math.min(40,Math.floor(($('boardwrap').clientWidth-12)/W)-2));applyZoom()};function setup(){saveSelectedDifficulty();hideVictory();showLoadingPopup(false);generation++;if(generationWorker){generationWorker.terminate();generationWorker=null}soundButton();$('flag-tip').textContent='🚩 깃발 두 번 터치 → 제거';$('flag-tip').classList.remove('done');[W,H,M]=presets[+$('level').value];N=W*H;mines=Array(N).fill(false);nums=Array(N).fill(0);revealed=Array(N).fill(false);flags=Array(N).fill(false);first=true;firstMovePending=true;validatedStartIndex=-1;verifiedBoard=false;over=false;busy=false;opened=0;hintsUsed=0;flagMode=false;clearInterval(timerId);$('timer').textContent='0';$('status').textContent='⏳ 난이도에 맞는 맵을 자동으로 생성합니다…';setMode('open');$('restart').disabled=false;scoreBoard();updateScore();const mobile=window.innerWidth<=650;
 const boardAvailableWidth=Math.max(210,window.innerWidth-(mobile?34:70));
 const availableHeight=Math.max(320,window.innerHeight-(mobile?235:300));
