@@ -133,7 +133,137 @@ body{padding-bottom:max(80px,calc(env(safe-area-inset-bottom,0px) + 56px))!impor
 .online-name input{min-width:120px;max-width:200px;flex:1;padding:9px;border-radius:8px;border:1px solid #72849c;background:#152238;color:#fff;font-size:14px}
 .online-name button{padding:8px}
 .victory-register{margin:14px auto 0;text-align:left;max-width:350px}.victory-register label{display:block;margin-bottom:7px;font-weight:800;color:#fff}.victory-register-row{display:flex;gap:7px}.victory-register-row input{min-width:0;flex:1;border-radius:8px;padding:10px;border:1px solid #93a5bd;background:#eef2f8;color:#172335;font-size:16px}.victory-register-row button{white-space:nowrap}.victory-register p{font-size:12px;margin:8px 0 0;color:#dce9ff}.victory-register button:disabled{opacity:.6}#victory-register[hidden]{display:none!important}
-</style></head><body class="compact-ui"><main><div class="top-layout"><div class="brand"><div class="brand-row"><h1>💣 PURE LOGIC</h1><button id="ui-toggle" type="button" class="ui-toggle" aria-pressed="true">☰ 전체 UI</button><div class="control-style"><span>조작 방식</span><button type="button" id="manual-control" class="control-style-button selected" aria-pressed="true">수동</button><button type="button" id="auto-control" class="control-style-button" aria-pressed="false">자동</button><button class="primary" id="restart">↻ 새 게임</button></div></div><p class="sub">눌러서 입체 블록을 열어보세요 · No Guess</p></div><section class="panel scoreboard"><div class="score-heading"><strong>🌍 난이도별 온라인 TOP 5</strong><button type="button" id="clear-scores">내 기록 초기화</button></div><div class="online-name"><button id="online-refresh" type="button">↻ 랭킹 갱신</button></div><div id="online-message" role="status" class="score-note"></div><div id="score-list">아직 기록이 없습니다.</div><p class="score-note">안전한 칸을 모두 열고 모든 지뢰에 정확히 깃발을 꽂으면 클리어! 온라인 랭킹은 전체 플레이어가 공유합니다. 인터넷 연결이 필요합니다.</p></section></div><section class="panel"><div class="controls"><label for="level">난이도</label><select id="level"><option value="0">입문 · 8×8 / 8개</option><option value="1">초급 · 9×9 / 10개</option><option value="2">중급 · 12×12 / 24개</option><option value="3">상급 · 16×16 / 40개</option><option value="4">전문가 · 20×20 / 75개</option><option value="5">마스터 · 25×25 / 115개</option><option value="6">그랜드마스터 · 30×30 / 165개</option><option value="7">챌린저 · 40×40 / 290개</option><option value="8">엘리트 · 50×50 / 450개</option><option value="9">레전드 · 60×60 / 650개</option><option value="10">신화 · 80×80 / 1,150개</option><option value="11">초월 · 100×100 / 1,800개</option></select><button id="hint">💡 논리 힌트</button><button id="sound-toggle" type="button" aria-pressed="true">🔊 소리 켜짐</button><span id="flag-tip" class="flag-tip" role="status">🚩 깃발 두 번 터치 → 제거</span></div><div class="action-modes" role="group" aria-label="터치 동작 선택"><button type="button" id="openmode" class="action-mode selected" aria-pressed="true"><span class="mode-icon">👆</span><strong>칸 열기</strong><small>✓ 선택됨</small></button><button type="button" id="flagmode" class="action-mode" aria-pressed="false"><span class="mode-icon">🚩</span><strong>깃발 놓기</strong><small>터치해서 표시</small></button></div><p class="touch-guide">수동(기본): 위 버튼으로 칸 열기/깃발 선택 · 자동: 열린 숫자/깃발을 눌러 모드 변경 · 깃발 두 번 터치 = 제거</p><div class="stats"><div>💣 <span>남은 지뢰</span> <b id="remaining">0</b></div><div>⏱️ <span>시간</span> <b id="timer">0</b>초</div><div>🔎 <span>열린 칸</span> <b id="opened">0</b></div></div><div class="score-summary">🏅 현재 점수 <b id="live-score">0</b> <span>· 💡 힌트 <b id="hint-count">0</b>회</span></div></section><div class="status" id="status" role="status">맵 준비가 완료되면 플레이할 수 있습니다.</div><div class="zoom-toolbar"><button type="button" id="zoom-out">− 축소</button><span id="zoom-level">100%</span><button type="button" id="zoom-in">＋ 확대</button><button type="button" id="zoom-fit">화면 맞춤</button></div><p class="zoom-note">한 손가락으로 밀면 이동하고, 두 손가락을 벌리거나 오므리면 확대·축소합니다. 짧게 터치하면 칸을 선택합니다. 길게 누르면 깃발을 설치합니다.</p><div class="boardwrap" id="boardwrap"><div id="board-loading" class="board-loading-overlay" role="dialog" aria-modal="true" aria-labelledby="board-loading-title" aria-hidden="true"><div class="board-loading-card"><span class="board-loading-spinner" aria-hidden="true"></span><strong id="board-loading-title">⏳ 맵 생성 중</strong><p id="board-loading-detail">난이도에 맞는 맵을 자동 생성 중입니다. 준비가 끝나면 모든 칸이 닫힌 게임판이 나타납니다.</p><small>잠시 기다려 주세요</small></div></div><div id="board" class="board" role="grid" aria-label="지뢰찾기 게임판"></div></div><section class="panel help" style="margin-top:16px"><strong>게임 방법</strong><p>휴대폰: 기본은 수동 모드이며 위 칸 열기/깃발 놓기 버튼으로 동작을 선택합니다. 자동 모드를 선택하면 열린 숫자 칸을 터치할 때 칸 열기 모드, 깃발 칸을 터치할 때 깃발 놓기 모드로 전환됩니다. 깃발을 두 번 빠르게 터치하면 제거됩니다. 위쪽 버튼도 사용할 수 있습니다. 빈 칸을 0.5초 길게 누르면 깃발을 놓습니다. 깃발을 빠르게 두 번 터치하면 깃발이 바로 제거됩니다. PC: 왼쪽 클릭은 선택한 동작, 오른쪽 클릭은 깃발입니다. 자동으로 열리는 시작 칸과 주변 8칸은 안전합니다. 숫자는 주변 8칸의 지뢰 개수입니다. 모든 안전한 칸을 열고 실제 지뢰에 깃발을 모두 정확히 표시하면 승리합니다.</p><p><strong>No Guess 보장:</strong> 시작할 때 실제 논리 풀이 엔진으로 검증한 맵만 사용합니다. 난이도를 선택하면 맵을 자동으로 생성합니다. 생성 중에는 게임판을 조작할 수 없습니다. 힌트는 현재 공개된 정보에서 논리적으로 확정되는 안전 칸을 찾아줍니다.</p></section></main><div id="victory-overlay" role="dialog" aria-modal="true" aria-labelledby="victory-title"><canvas id="victory-confetti" aria-hidden="true"></canvas><section class="victory-card"><div class="victory-trophy" aria-hidden="true">🏆</div><h2 id="victory-title">완전 클리어!</h2><p>모든 안전 칸과 지뢰 깃발을 맞혔어요!</p><div class="victory-points" id="victory-points">0점</div><p class="victory-meta" id="victory-meta"></p><div class="victory-register" id="victory-register"><label for="player-name">🌍 온라인 랭킹 등록 닉네임</label><div class="victory-register-row"><input id="player-name" type="text" maxlength="20" placeholder="닉네임 (최대 20자)" autocomplete="nickname"><button id="register-score" type="button" class="primary">랭킹 등록</button></div><p id="victory-register-status" role="status">클리어 기록을 온라인 랭킹에 등록할 수 있어요.</p></div><div class="victory-actions"><button id="victory-close" type="button">결과 보기</button><button class="primary" id="victory-restart" type="button">다시 도전</button></div></section></div><script>
+</style><style id="layout-reordered-v2">
+/* Zoom controls directly above the statistics, game controls below board. */
+.zoom-toolbar{justify-content:flex-end;margin:8px 0 5px;gap:6px}
+.stats{display:flex;justify-content:flex-start;gap:12px;flex-wrap:wrap;margin:4px 0 10px}
+.bottom-actions{position:relative;margin:12px 0 max(54px,env(safe-area-inset-bottom,0px));padding:0 4px}
+.bottom-actions .action-modes{display:flex!important;width:100%;gap:8px;margin:0}
+.bottom-actions .action-mode{flex:1;min-width:0}
+body.compact-ui #status{display:none!important}
+body.compact-ui .panel:has(>.controls){display:none!important}
+body.compact-ui .stats{display:flex!important}
+body.compact-ui .bottom-actions{display:block!important}
+/* Previous large bottom board margin is replaced by the always-visible action row. */
+.boardwrap{margin-bottom:0!important}
+@media(max-width:650px){.zoom-toolbar{justify-content:center}.stats{justify-content:center;gap:8px}.bottom-actions{margin-bottom:max(72px,calc(env(safe-area-inset-bottom,0px) + 56px))}.bottom-actions .action-mode{padding:12px 8px}}
+</style><style id="top-zoom-and-stats-size">
+/* Put zoom tools in the header's free space, beside manual/auto/restart. */
+.brand-row{display:flex;align-items:center;flex-wrap:wrap;column-gap:8px;row-gap:7px}
+.brand-row .zoom-toolbar{display:flex;align-items:center;justify-content:flex-start;gap:6px;margin:0 0 0 auto;flex-wrap:wrap}
+.brand-row .zoom-toolbar button{padding:7px 10px;white-space:nowrap}
+.brand-row #zoom-level{white-space:nowrap}
+/* Increase only the mine/time/opened stats by 5 percent. */
+.stats{font-size:105%}
+@media(max-width:650px){
+ .brand-row .zoom-toolbar{margin-left:0;justify-content:flex-start;width:auto}
+ .brand-row .zoom-toolbar button{padding:7px 9px;font-size:12px}
+ .stats{font-size:12.6px}
+}
+/* Only the restart button moves next to the logo. Other tools stay on their own row. */
+.brand-row{display:grid!important;grid-template-columns:max-content max-content minmax(0,1fr);column-gap:12px;row-gap:10px;align-items:center}
+.brand-row>h1{grid-column:1;grid-row:1;margin:0!important}
+.brand-row>#restart{grid-column:2;grid-row:1;margin:0 0 0 12px!important;white-space:nowrap;justify-self:start}
+.brand-row>#ui-toggle{grid-column:1;grid-row:2;justify-self:start}
+.brand-row>.control-style{grid-column:2;grid-row:2;justify-self:start}
+.brand-row>.zoom-toolbar{grid-column:3;grid-row:2;justify-self:end;margin:0!important}
+.stats{justify-content:center!important;text-align:center!important}
+@media(max-width:650px){
+ .brand-row{grid-template-columns:max-content minmax(0,1fr);column-gap:8px;row-gap:8px}
+ .brand-row>h1{grid-column:1;grid-row:1;width:auto!important;font-size:clamp(21px,5.5vw,30px)}
+ .brand-row>#restart{grid-column:2;grid-row:1;margin:0 0 0 8px!important}
+ .brand-row>#ui-toggle{grid-column:1;grid-row:2}
+ .brand-row>.control-style{grid-column:2;grid-row:2}
+ .brand-row>.zoom-toolbar{grid-column:1 / -1;grid-row:3;justify-self:center;justify-content:center}
+ .stats{justify-content:center!important}
+}
+</style><style id="swap-restart-ui-position">
+/* Only exchange the positions of UI toggle and New Game. */
+.brand-row>#ui-toggle{grid-column:2!important;grid-row:1!important;justify-self:start!important;margin:0 0 0 12px!important}
+.brand-row>#restart{grid-column:1!important;grid-row:2!important;justify-self:start!important;margin:0!important}
+@media(max-width:650px){
+ .brand-row>#ui-toggle{grid-column:2!important;grid-row:1!important;margin:0 0 0 8px!important}
+ .brand-row>#restart{grid-column:1!important;grid-row:2!important;margin:0!important}
+}
+</style><style id="single-line-controls">
+/* Title and UI toggle on row one; all game tools on a single second row. */
+.brand-row{display:grid!important;grid-template-columns:repeat(2,max-content) minmax(0,1fr)!important;column-gap:12px!important;row-gap:9px!important;align-items:center!important}
+.brand-row>h1{grid-column:1!important;grid-row:1!important;width:auto!important;margin:0!important}
+.brand-row>#ui-toggle{grid-column:2!important;grid-row:1!important;margin:0!important;justify-self:start!important}
+.brand-row>#restart{grid-column:1!important;grid-row:2!important;margin:0!important;justify-self:start!important}
+.brand-row>.control-style{grid-column:2!important;grid-row:2!important;display:flex!important;flex-wrap:nowrap!important;white-space:nowrap!important;gap:5px!important;justify-self:start!important}
+.brand-row>.zoom-toolbar{grid-column:3!important;grid-row:2!important;display:flex!important;flex-wrap:nowrap!important;white-space:nowrap!important;justify-self:end!important;justify-content:flex-end!important;width:auto!important;margin:0!important;gap:5px!important}
+.brand-row>.zoom-toolbar button,.brand-row>.control-style button,.brand-row>#restart{padding:8px 9px!important;white-space:nowrap!important}
+.brand-row .zoom-toolbar #zoom-level{white-space:nowrap!important}
+/* Narrow screens: keep a single line and allow the toolbar to scroll horizontally rather than wrap. */
+@media(max-width:800px){
+ .brand-row{grid-template-columns:max-content minmax(0,1fr)!important;column-gap:8px!important}
+ .brand-row>h1{grid-column:1!important;grid-row:1!important;font-size:clamp(20px,5vw,30px)!important}
+ .brand-row>#ui-toggle{grid-column:2!important;grid-row:1!important}
+ .brand-row>#restart,.brand-row>.control-style,.brand-row>.zoom-toolbar{grid-row:2!important;grid-column:auto!important}
+ .brand-row{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+ .brand-row>h1{flex:0 0 auto!important}
+ .brand-row>#ui-toggle{flex:0 0 auto!important}
+ .brand-row>#restart{order:2!important}
+ .brand-row>.control-style{order:3!important}
+ .brand-row>.zoom-toolbar{order:4!important;justify-self:auto!important}
+ .brand-row>h1,.brand-row>#ui-toggle{order:0!important}
+ .brand-row{position:relative!important}
+ .brand-row>.zoom-toolbar{margin-left:0!important}
+}
+/* Avoid wrapping even on small devices by putting the three tool groups in one scrollable bar. */
+@media(max-width:800px){
+ .brand-row{display:grid!important;grid-template-columns:max-content minmax(0,1fr)!important}
+ .brand-row>#restart{grid-column:1!important;grid-row:2!important}
+ .brand-row>.control-style{grid-column:2!important;grid-row:2!important}
+ .brand-row>.zoom-toolbar{grid-column:1 / -1!important;grid-row:3!important;justify-self:start!important}
+}
+@media(min-width:801px) and (max-width:1050px){
+ .brand-row{column-gap:7px!important}
+ .brand-row>.control-style{gap:4px!important}
+ .brand-row>.zoom-toolbar{gap:4px!important}
+ .brand-row>.zoom-toolbar button,.brand-row>.control-style button,.brand-row>#restart{font-size:13px!important;padding:7px 7px!important}
+}
+.stats{justify-content:center!important}
+</style><style id="tight-control-alignment">
+/* Keep all controls immediately adjacent instead of spreading them across the header. */
+.brand-row{display:grid!important;grid-template-columns:max-content max-content max-content max-content 1fr!important;column-gap:8px!important;row-gap:10px!important;align-items:center!important;justify-content:start!important}
+.brand-row>h1{grid-column:1!important;grid-row:1!important}
+.brand-row>#ui-toggle{grid-column:2!important;grid-row:1!important}
+.brand-row>#restart{grid-column:1!important;grid-row:2!important;margin:0!important}
+.brand-row>.control-style{grid-column:2!important;grid-row:2!important;justify-self:start!important;margin:0!important;gap:5px!important}
+.brand-row>.zoom-toolbar{grid-column:3!important;grid-row:2!important;justify-self:start!important;justify-content:flex-start!important;margin:0!important;gap:5px!important}
+.brand-row>.control-style,.brand-row>.zoom-toolbar{display:flex!important;flex-wrap:nowrap!important;white-space:nowrap!important;width:max-content!important}
+@media(max-width:800px){
+ .brand-row{display:grid!important;grid-template-columns:max-content max-content max-content 1fr!important;column-gap:6px!important;row-gap:8px!important;overflow-x:auto!important;max-width:100%!important;flex-wrap:nowrap!important}
+ .brand-row>#restart{grid-column:1!important;grid-row:2!important}
+ .brand-row>.control-style{grid-column:2!important;grid-row:2!important}
+ .brand-row>.zoom-toolbar{grid-column:3!important;grid-row:2!important;justify-self:start!important}
+}
+
+/* Stable header: keep all action controls adjacent, independent of logo columns. */
+.brand-row{display:flex!important;flex-wrap:wrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;overflow:visible!important}
+.brand-row>h1,.brand-row>#ui-toggle{order:0!important;flex:none!important;grid-column:auto!important;grid-row:auto!important}
+.brand-row>.header-action-row{order:2!important;flex:0 0 100%!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;min-width:0;overflow-x:auto;scrollbar-width:thin;padding-bottom:2px}
+.header-action-row>#restart,.header-action-row>.control-style,.header-action-row>.zoom-toolbar{position:static!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;flex:none!important;min-width:max-content!important;width:auto!important;margin:0!important;padding:0!important;grid-column:auto!important;grid-row:auto!important;white-space:nowrap!important}
+.header-action-row>#restart{padding:9px 13px!important}
+.header-action-row>.control-style{gap:5px!important}
+.header-action-row>.zoom-toolbar{gap:5px!important}
+@media(max-width:600px){.brand-row>.header-action-row{gap:5px!important}.header-action-row>#restart{padding:8px 9px!important}.header-action-row>.control-style span{display:none}}
+</style><style id="grouped-controls-visual">
+/* Three distinct blue-bordered groups, as in approved mockup. */
+.brand-row>.header-action-row{gap:10px!important;align-items:stretch!important;padding:4px 1px 6px!important}
+.header-action-row>.control-group{box-sizing:border-box!important;display:flex!important;align-items:center!important;gap:8px!important;flex:none!important;border:2px solid #315b95!important;border-radius:17px!important;background:linear-gradient(180deg,#111e35,#0d172b)!important;box-shadow:inset 0 1px 0 rgba(173,208,255,.14),0 2px 8px rgba(0,0,0,.18)!important;padding:12px 11px 10px!important;margin:0!important;min-width:0!important;width:auto!important;position:relative!important;white-space:nowrap!important}
+.header-action-row>.restart-group{padding:9px!important}
+.header-action-row>.restart-group>#restart{margin:0!important;padding:12px 17px!important;font-size:inherit!important}
+.header-action-row>.control-style{padding-top:22px!important}
+.header-action-row>.control-style>span{display:block!important;position:absolute!important;top:3px!important;left:15px!important;font-size:12px!important;line-height:16px!important;color:#b7cbea!important;font-weight:700!important}
+.header-action-row>.zoom-toolbar{padding-top:22px!important;justify-content:flex-start!important}
+.header-action-row>.zoom-toolbar>.group-caption{display:block!important;position:absolute!important;top:3px!important;left:15px!important;font-size:12px!important;line-height:16px!important;color:#b7cbea!important;font-weight:700!important}
+.header-action-row>.zoom-toolbar>#zoom-level{min-width:44px;text-align:center}
+.header-action-row>.control-style button,.header-action-row>.zoom-toolbar button{margin:0!important}
+@media(max-width:650px){.header-action-row>.control-group{padding-left:8px!important;padding-right:8px!important;gap:5px!important}.header-action-row>.restart-group>#restart{padding:10px 12px!important}.header-action-row>.control-style>span,.header-action-row>.zoom-toolbar>.group-caption{font-size:11px!important}}
+</style></head><body class="compact-ui"><main><div class="top-layout"><div class="brand"><div class="brand-row"><h1>💣 PURE LOGIC</h1><button id="ui-toggle" type="button" class="ui-toggle" aria-pressed="true">☰ 전체 UI</button><div class="header-action-row"><div class="control-group restart-group"><button class="primary" id="restart" type="button">↻ 새 게임</button></div><div class="control-style control-group"><span>조작 방식</span><button type="button" id="manual-control" class="control-style-button selected" aria-pressed="true">수동</button><button type="button" id="auto-control" class="control-style-button" aria-pressed="false">자동</button></div><div class="zoom-toolbar control-group"><span class="group-caption">화면 크기</span><button type="button" id="zoom-out">− 축소</button><span id="zoom-level">100%</span><button type="button" id="zoom-in">＋ 확대</button><button type="button" id="zoom-fit">화면 맞춤</button></div></div></div><p class="sub">눌러서 입체 블록을 열어보세요 · No Guess</p></div><section class="panel scoreboard"><div class="score-heading"><strong>🌍 난이도별 온라인 TOP 5</strong><button type="button" id="clear-scores">내 기록 초기화</button></div><div class="online-name"><button id="online-refresh" type="button">↻ 랭킹 갱신</button></div><div id="online-message" role="status" class="score-note"></div><div id="score-list">아직 기록이 없습니다.</div><p class="score-note">안전한 칸을 모두 열고 모든 지뢰에 정확히 깃발을 꽂으면 클리어! 온라인 랭킹은 전체 플레이어가 공유합니다. 인터넷 연결이 필요합니다.</p></section></div><section class="panel"><div class="controls"><label for="level">난이도</label><select id="level"><option value="0">입문 · 8×8 / 8개</option><option value="1">초급 · 9×9 / 10개</option><option value="2">중급 · 12×12 / 24개</option><option value="3">상급 · 16×16 / 40개</option><option value="4">전문가 · 20×20 / 75개</option><option value="5">마스터 · 25×25 / 115개</option><option value="6">그랜드마스터 · 30×30 / 165개</option><option value="7">챌린저 · 40×40 / 290개</option><option value="8">엘리트 · 50×50 / 450개</option><option value="9">레전드 · 60×60 / 650개</option><option value="10">신화 · 80×80 / 1,150개</option><option value="11">초월 · 100×100 / 1,800개</option></select><button id="hint">💡 논리 힌트</button><button id="sound-toggle" type="button" aria-pressed="true">🔊 소리 켜짐</button><span id="flag-tip" class="flag-tip" role="status">🚩 깃발 두 번 터치 → 제거</span></div><p class="touch-guide">수동(기본): 위 버튼으로 칸 열기/깃발 선택 · 자동: 열린 숫자/깃발을 눌러 모드 변경 · 깃발 두 번 터치 = 제거</p><div class="score-summary">🏅 현재 점수 <b id="live-score">0</b> <span>· 💡 힌트 <b id="hint-count">0</b>회</span></div></section><div class="status" id="status" role="status">맵 준비가 완료되면 플레이할 수 있습니다.</div><div class="stats"><div>💣 <span>남은 지뢰</span> <b id="remaining">0</b></div><div>⏱️ <span>시간</span> <b id="timer">0</b>초</div><div>🔎 <span>열린 칸</span> <b id="opened">0</b></div></div><p class="zoom-note">한 손가락으로 밀면 이동하고, 두 손가락을 벌리거나 오므리면 확대·축소합니다. 짧게 터치하면 칸을 선택합니다. 길게 누르면 깃발을 설치합니다.</p><div class="boardwrap" id="boardwrap"><div id="board-loading" class="board-loading-overlay" role="dialog" aria-modal="true" aria-labelledby="board-loading-title" aria-hidden="true"><div class="board-loading-card"><span class="board-loading-spinner" aria-hidden="true"></span><strong id="board-loading-title">⏳ 맵 생성 중</strong><p id="board-loading-detail">난이도에 맞는 맵을 자동 생성 중입니다. 준비가 끝나면 모든 칸이 닫힌 게임판이 나타납니다.</p><small>잠시 기다려 주세요</small></div></div><div id="board" class="board" role="grid" aria-label="지뢰찾기 게임판"></div></div><section class="bottom-actions" aria-label="게임 조작 버튼"><div class="action-modes" role="group" aria-label="터치 동작 선택"><button type="button" id="openmode" class="action-mode selected" aria-pressed="true"><span class="mode-icon">👆</span><strong>칸 열기</strong><small>✓ 선택됨</small></button><button type="button" id="flagmode" class="action-mode" aria-pressed="false"><span class="mode-icon">🚩</span><strong>깃발 놓기</strong><small>터치해서 표시</small></button></div></section><section class="panel help" style="margin-top:16px"><strong>게임 방법</strong><p>휴대폰: 기본은 수동 모드이며 위 칸 열기/깃발 놓기 버튼으로 동작을 선택합니다. 자동 모드를 선택하면 열린 숫자 칸을 터치할 때 칸 열기 모드, 깃발 칸을 터치할 때 깃발 놓기 모드로 전환됩니다. 깃발을 두 번 빠르게 터치하면 제거됩니다. 위쪽 버튼도 사용할 수 있습니다. 빈 칸을 0.5초 길게 누르면 깃발을 놓습니다. 깃발을 빠르게 두 번 터치하면 깃발이 바로 제거됩니다. PC: 왼쪽 클릭은 선택한 동작, 오른쪽 클릭은 깃발입니다. 자동으로 열리는 시작 칸과 주변 8칸은 안전합니다. 숫자는 주변 8칸의 지뢰 개수입니다. 모든 안전한 칸을 열고 실제 지뢰에 깃발을 모두 정확히 표시하면 승리합니다.</p><p><strong>No Guess 보장:</strong> 시작할 때 실제 논리 풀이 엔진으로 검증한 맵만 사용합니다. 난이도를 선택하면 맵을 자동으로 생성합니다. 생성 중에는 게임판을 조작할 수 없습니다. 힌트는 현재 공개된 정보에서 논리적으로 확정되는 안전 칸을 찾아줍니다.</p></section></main><div id="victory-overlay" role="dialog" aria-modal="true" aria-labelledby="victory-title"><canvas id="victory-confetti" aria-hidden="true"></canvas><section class="victory-card"><div class="victory-trophy" aria-hidden="true">🏆</div><h2 id="victory-title">완전 클리어!</h2><p>모든 안전 칸과 지뢰 깃발을 맞혔어요!</p><div class="victory-points" id="victory-points">0점</div><p class="victory-meta" id="victory-meta"></p><div class="victory-register" id="victory-register"><label for="player-name">🌍 온라인 랭킹 등록 닉네임</label><div class="victory-register-row"><input id="player-name" type="text" maxlength="20" placeholder="닉네임 (최대 20자)" autocomplete="nickname"><button id="register-score" type="button" class="primary">랭킹 등록</button></div><p id="victory-register-status" role="status">클리어 기록을 온라인 랭킹에 등록할 수 있어요.</p></div><div class="victory-actions"><button id="victory-close" type="button">결과 보기</button><button class="primary" id="victory-restart" type="button">다시 도전</button></div></section></div><script>
 'use strict';
 // Keep essential controls visible; let players reveal optional panels.
 window.addEventListener('DOMContentLoaded',()=>{
@@ -448,7 +578,16 @@ function setMode(next){
 })();
 function setControlStyle(next){controlStyle=next;for(const [id,kind] of [['manual-control','manual'],['auto-control','auto']]){const b=$(id),active=next===kind;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active))}}
 $('manual-control').onclick=()=>setControlStyle('manual');$('auto-control').onclick=()=>setControlStyle('auto');
-$('restart').onclick=()=>{saveSelectedDifficulty();setup()};$('level').onchange=()=>{
+$('restart').onclick=()=>{
+  // 깃발 2개 이상 놓은 진행 중인 게임만 확인 요청.
+  // 시작 전 또는 지뢰를 밟아 종료된 게임은 즉시 재시작.
+  const placedFlags=flags.filter(Boolean).length;
+  if(!over && !first && placedFlags>=2){
+    if(!window.confirm('진행 중인 게임을 종료하고 새 게임을 시작할까요?\n현재 진행 상황은 사라집니다.'))return;
+  }
+  saveSelectedDifficulty();
+  setup();
+};$('level').onchange=()=>{
  try{localStorage.setItem(LEVEL_STORAGE_KEY,$('level').value)}catch(e){}
  setup();
 };
